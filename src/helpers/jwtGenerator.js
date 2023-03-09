@@ -7,7 +7,7 @@ const generateToken = (user) => {
     const token = jwt.sign({
         id,
         userName,
-        exp: Date.now() + 180 * 1000
+        exp: Date.now() + 120 * 1000
     },key)
 
     return token

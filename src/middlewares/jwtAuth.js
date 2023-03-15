@@ -5,16 +5,16 @@ const usersModel = require('../models/users')
 const authenticateJWT = async (req, res, next) =>{
     const authHeader = req.header('Authorization') 
     if(!authHeader){
-        return res.send(401).json({
-            msg: 'There is not token in the petition'
+        return res.status(401).json({
+            msg: 'There is not token in the request'
         })
     }
     try{
         const token = authHeader.split(' ')[1]
-        const { id } = jwt.verify(token, key)
+        const { id, exp } = jwt.verify(token, key)
         const user = await usersModel.findById(id)
         if(!user){
-            return res.send(401).json({
+            return res.status(401).json({
                 msg: 'The token it is not valid'
             })
         }
@@ -24,7 +24,7 @@ const authenticateJWT = async (req, res, next) =>{
     }
     catch(error){
         res.status(401).json({
-            msg: 'The token it is not validd'
+            msg: 'The token it is not valid'
         })
     }
 

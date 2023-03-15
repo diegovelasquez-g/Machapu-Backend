@@ -1,5 +1,6 @@
 const express = require('express')
 const users = require("./src/routes/users.routes");
+const services = require("./src/routes/services.routes");
 const app = express()
 const PORT = 8080
 const connectDB = require('./database')
@@ -18,11 +19,11 @@ app.use(express.json())
 
 //Importing Routers
 app.use("/api/users",users)  
-
+app.use("/api/services", services)
 
 
 //Creating the server
 app.listen(PORT, () => {
-    console.log(`Example app listening on port ${PORT}`)
+    console.log(`Server listening on port ${PORT}`)
   })
 

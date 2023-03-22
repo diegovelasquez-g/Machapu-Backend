@@ -39,6 +39,7 @@ const createUser = async (req,res,next) => {
 
 const signIn = async (req,res,next) => {
     const {userName, password} = req.body
+    console.log(req.body)
     try{
         const user = await usersModel.findOne({userName: userName})
         if(!user){
@@ -52,7 +53,6 @@ const signIn = async (req,res,next) => {
         //Generate Jwt
         const jwt = generateToken(user)
         res.status(201).json({
-            user,
             msg: 'Succesfully login',
             jwt
         })
